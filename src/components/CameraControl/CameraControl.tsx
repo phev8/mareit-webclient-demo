@@ -143,8 +143,11 @@ const CameraControl: React.FC<CameraControlProps> = (props) => {
         for (const k in cameraControlValuesRef.current) {
             if (k === 'camera') { continue }
             // rotateCamera?camera=CameraTest&type=YAW&value=0.1'
-            const value = cameraControlValuesRef.current[k as keyof typeof cameraControlValues] as number;
+            let value = cameraControlValuesRef.current[k as keyof typeof cameraControlValues] as number;
             if (value !== 0) {
+                if (k === 'yaw') {
+                    value = -value;
+                }
                 url += `&type=${k.toUpperCase()}&value=${value.toFixed(2)}`;
                 nonzero = true;
             }
