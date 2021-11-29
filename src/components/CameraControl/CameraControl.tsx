@@ -99,7 +99,7 @@ const CameraControl: React.FC<CameraControlProps> = (props) => {
                 roll: 0,
                 yaw: 0,
             });
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
             setIsLoading(false);
             setError(JSON.stringify(err.message));
@@ -127,7 +127,7 @@ const CameraControl: React.FC<CameraControlProps> = (props) => {
         const url = `${serverAddress}/api/selectCamera?camera=${selectedCamera.camera}`;
         try {
             await axios.get(url, { timeout: requestTimeout });
-        } catch (err) {
+        } catch (err: any) {
             console.error(err);
             setError(JSON.stringify(err.message));
         }
@@ -161,7 +161,7 @@ const CameraControl: React.FC<CameraControlProps> = (props) => {
                 await axios.get(url, { timeout: requestTimeout });
                 rotateCamera()
                 setIsLoading(false);
-            } catch (err) {
+            } catch (err: any) {
                 console.error(err);
                 setIsLoading(false);
                 setError(JSON.stringify(err.message));
