@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import roboterAPIInstance, { getAvailableRobots, selectRobotReq } from '../../api/roboter';
-import leitstandAPIInstance from '../../api/leitstand';
-import { RobotLabel } from '../../types/robot';
+import roboterAPIInstance, { getAvailableRobots, selectRobotReq } from '../api/roboter';
+import leitstandAPIInstance from '../api/leitstand';
+import { RobotLabel } from '../types/robot';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../store/hooks';
-import { selectRobot } from '../../store/robot';
+import { useAppDispatch } from '../store/hooks';
+import { selectRobot } from '../store/robot';
 
 
 
@@ -20,6 +20,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchAvailableRobots()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchAvailableRobots = async () => {
