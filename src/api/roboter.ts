@@ -11,6 +11,9 @@ export const getLogMessageReq = () => roboterAPIInstance.get('/api/getLogMessage
 export const getPermissionRequestsReq = () => roboterAPIInstance.get('/api/getPermissionRequests');
 export const setPermissionRequestReq = (robotName: string, uid: string, allow: boolean) => roboterAPIInstance.get(`/api/setPermission?robot=${robotName}&requestuid=${uid}&allow=${allow}`);
 
+export const getSimpleActionsReq = () => roboterAPIInstance.get('/api/requestSimpleActions');
+export const setSimpleActionCommandReq = (actionName: string, state: any) => roboterAPIInstance.post(`/api/setSimpleActionCommand`, { name: actionName, state: state });
+
 export const getCurrentPoseReq = () => roboterAPIInstance.get('/api/getCurrentPose');
 interface GoTo {
   maxForwardSpeed: number;

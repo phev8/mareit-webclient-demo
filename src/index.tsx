@@ -7,6 +7,24 @@ import 'typeface-roboto';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { setLeitStandAPIBaseURL } from './api/leitstand';
+import { setRobotAPIBaseURL } from './api/roboter';
+
+const loadAPIAddresses = () => {
+  const apiAddr = localStorage.getItem('api');
+  if (!apiAddr) {
+    return
+  }
+  const p = JSON.parse(apiAddr);
+  if (p.leitstand) {
+    setLeitStandAPIBaseURL(p.leitstand)
+  }
+  if (p.robot) {
+    setRobotAPIBaseURL(p.robot)
+  }
+}
+
+loadAPIAddresses();
 
 ReactDOM.render(
   <Provider store={store}>
