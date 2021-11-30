@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Nav, Navbar as BsNavbar } from 'react-bootstrap';
 import SettingsIcon from '@material-ui/icons/Settings';
-import BackspaceIcon from '@material-ui/icons/Backspace';
+import BackspaceIcon from '@material-ui/icons/CloseRounded';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 import { getRobotStateReq } from '../api/roboter';
