@@ -21,37 +21,30 @@ const PermissionRequests: React.FC<PermissionRequestsProps> = (props) => {
 
 
   const fetchPermissionRequests = () => {
-    try {
-      getPermissionRequestsReq().then(resp => {
-        const requests = resp.data;
-        if (!requests) {
-          return;
-        }
-        const PRs: PermissionRequest[] = [];
-        for (let key in requests) {
-          requests[key].forEach((pr: any) => {
-            PRs.push({
-              robotName: key,
-              description: pr.description,
-              requestuid: pr.requestuid
-            })
-          });
-        }
-        setPermissionReqs(PRs);
-      })
-    } catch (e: any) {
-      console.error(e);
-    }
+    getPermissionRequestsReq().then(resp => {
+      const requests = resp.data;
+      if (!requests) {
+        return;
+      }
+      const PRs: PermissionRequest[] = [];
+      for (let key in requests) {
+        requests[key].forEach((pr: any) => {
+          PRs.push({
+            robotName: key,
+            description: pr.description,
+            requestuid: pr.requestuid
+          })
+        });
+      }
+      setPermissionReqs(PRs);
+    }).catch((e: any) => console.error(e))
+
   }
 
   const replyToPermissionRequest = (pr: PermissionRequest, allow: boolean) => {
-    try {
-      setPermissionRequestReq(pr.robotName, pr.requestuid, allow).then(() => {
-        fetchPermissionRequests();
-      })
-    } catch (e: any) {
-      console.error(e);
-    }
+    setPermissionRequestReq(pr.robotName, pr.requestuid, allow).then(() => {
+      fetchPermissionRequests();
+    }).catch((e: any) => console.error(e))
   }
 
   return (

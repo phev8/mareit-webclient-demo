@@ -101,17 +101,13 @@ const GoToCommands: React.FC<GoToCommandsProps> = (props) => {
                 <button
                   className="btn btn-secondary flex-grow-1 me-2"
                   onClick={() => {
-                    try {
-                      setGoToCommandReq({
-                        waypointMaxForwardSpeed: 0,
-                        maxForwardSpeed: 0,
-                        waypointPose: bookmark.pose,
-                      }).then(() => {
-                        alert('Command successfully sent.')
-                      })
-                    } catch (e: any) {
-                      console.error(e);
-                    }
+                    setGoToCommandReq({
+                      waypointMaxForwardSpeed: 0,
+                      maxForwardSpeed: 0,
+                      waypointPose: bookmark.pose,
+                    }).then(() => {
+                      alert('Command successfully sent.')
+                    }).catch((e: any) => console.error(e))
                   }}
                 >Go to</button>
                 <button

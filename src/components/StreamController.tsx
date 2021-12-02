@@ -22,46 +22,34 @@ const StreamController: React.FC<StreamControllerProps> = (props) => {
 
 
   const fetchStreams = () => {
-    try {
-      getRobotStreamReq().then(resp => {
-        const streams = resp.data;
-        if (!streams) {
-          return;
-        }
-        const newStreams: Stream[] = [];
-        for (let key in streams) {
-          streams[key].forEach((stream: any) => {
-            newStreams.push({
-              robotName: key,
-              name: stream.name,
-            })
-          });
-        }
-        setStreams(newStreams);
-      })
-    } catch (e: any) {
-      console.error(e);
-    }
+    getRobotStreamReq().then(resp => {
+      const streams = resp.data;
+      if (!streams) {
+        return;
+      }
+      const newStreams: Stream[] = [];
+      for (let key in streams) {
+        streams[key].forEach((stream: any) => {
+          newStreams.push({
+            robotName: key,
+            name: stream.name,
+          })
+        });
+      }
+      setStreams(newStreams);
+    }).catch((e: any) => console.error(e))
   }
 
   const initStream = (stream: Stream) => {
-    try {
-      initStreamReq(stream.robotName, stream.name).then(() => {
-        fetchStreams();
-      })
-    } catch (e: any) {
-      console.error(e);
-    }
+    initStreamReq(stream.robotName, stream.name).then(() => {
+      fetchStreams();
+    }).catch((e: any) => console.error(e))
   }
 
   const deleteStream = (stream: Stream) => {
-    try {
-      deleteStreamReq(stream.robotName, stream.name).then(() => {
-        fetchStreams();
-      })
-    } catch (e: any) {
-      console.error(e);
-    }
+    deleteStreamReq(stream.robotName, stream.name).then(() => {
+      fetchStreams();
+    }).catch((e: any) => console.error(e))
   }
 
 
