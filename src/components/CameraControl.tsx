@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const minDelta = -0.1;
-const maxDelta = 0.1;
-const stepSize = 0.005;
+const minDelta = -0.01;
+const maxDelta = 0.01;
+const stepSize = 0.0005;
 
 
 const CameraControl: React.FC<CameraControlProps> = (props) => {
