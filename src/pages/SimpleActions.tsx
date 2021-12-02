@@ -20,41 +20,35 @@ const SimpleActions: React.FC<SimpleActionsProps> = (props) => {
   const [actions, setActions] = useState<SimpleAction[]>([]);
 
   useEffect(() => {
+    fetchActions()
+  }, [])
+
+  const fetchActions = async () => {
     try {
-      getSimpleActionsReq().then(resp => {
-        console.log(resp.data)
-        setActions(resp.data.actions);
-      })
+      const resp = await getSimpleActionsReq();
+      console.log(resp.data)
+      setActions(resp.data.actions);
     } catch (e: any) {
       console.error(e);
     }
-
-  }, [])
+  }
 
   const renderAction = (action: SimpleAction) => {
     if (action.type.type === 'TRIGGER') {
       return <button className="btn btn-danger w-100"
         onClick={() => {
-          try {
-            setSimpleActionCommandReq(action.name, 1).then(resp => {
-              console.log(resp)
-            })
-          } catch (e: any) {
-            console.error(e);
-          }
+          setSimpleActionCommandReq(action.name, 1).then(resp => {
+            console.log(resp)
+          }).catch((e: any) => console.error(e))
         }}
       >{action.name}</button>
     } else if (action.type.valueNames !== undefined) {
       return <Form.Select aria-label="Default select example"
         onChange={(event) => {
           const value = event.target.value;
-          try {
-            setSimpleActionCommandReq(action.name, value).then(resp => {
-              console.log(resp)
-            })
-          } catch (e: any) {
-            console.error(e);
-          }
+          setSimpleActionCommandReq(action.name, value).then(resp => {
+            console.log(resp)
+          }).catch((e: any) => console.error(e))
         }}
       >
         {action.type.valueNames.map(v => <option key={v.value} value={v.value !== undefined ? v.value : 0}>{v.name}</option>)}
@@ -67,13 +61,9 @@ const SimpleActions: React.FC<SimpleActionsProps> = (props) => {
         defaultValue={0}
         onChange={(event) => {
           const value = event.target.value;
-          try {
-            setSimpleActionCommandReq(action.name, value).then(resp => {
-              console.log(resp)
-            })
-          } catch (e: any) {
-            console.error(e);
-          }
+          setSimpleActionCommandReq(action.name, value).then(resp => {
+            console.log(resp)
+          }).catch((e: any) => console.error(e))
         }}
       ></Form.Range>
       </div>
