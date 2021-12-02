@@ -20,6 +20,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
     if (!selectedRobot) {
       navigate('/')
     }
+
     fetchRobotState()
     const timer = setTimeout(() => fetchRobotState(), 5000)
     return () => clearTimeout(timer);
@@ -27,12 +28,11 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   }, [])
 
 
-  const fetchRobotState = () => {
+  const fetchRobotState = async () => {
     try {
-      getRobotStateReq().then(resp => {
-        const states = resp.data.state;
-        setRobotState(states)
-      })
+      const resp = await getRobotStateReq()
+      const states = resp.data.state;
+      setRobotState(states)
     } catch (e: any) {
       setRobotState(['API ERROR'])
       console.error(e);

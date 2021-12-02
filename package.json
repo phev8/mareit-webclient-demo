@@ -1,6 +1,7 @@
 {
   "name": "mare-it-webui",
   "version": "0.1.0",
+  "homepage": "/html",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",

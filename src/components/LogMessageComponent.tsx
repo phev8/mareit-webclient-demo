@@ -19,21 +19,20 @@ const LogMessageComponent: React.FC<LogMessageComponentProps> = (props) => {
   }, [])
 
 
-  const fetchLogMessage = () => {
+  const fetchLogMessage = async () => {
     try {
-      getLogMessageReq().then(resp => {
-        const logMessage = resp.data;
-        setLogMessages(prev => {
-          if (prev.length > 0) {
-            if (prev.find(l => l.message === logMessage.message)) {
-              return prev;
-            }
+      const resp = await getLogMessageReq()
+      const logMessage = resp.data;
+      setLogMessages(prev => {
+        if (prev.length > 0) {
+          if (prev.find(l => l.message === logMessage.message)) {
+            return prev;
           }
-          return [
-            ...prev,
-            logMessage,
-          ]
-        })
+        }
+        return [
+          ...prev,
+          logMessage,
+        ]
       })
     } catch (e: any) {
       console.error(e);

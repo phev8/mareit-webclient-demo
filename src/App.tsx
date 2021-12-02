@@ -15,8 +15,7 @@ import SimpleActions from './pages/SimpleActions';
 
 function App() {
   return (
-
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : undefined}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="overview" element={<Overview />} />
@@ -24,6 +23,14 @@ function App() {
         <Route path="go-to" element={<GoToCommands />} />
         <Route path="camera-config" element={<CameraConfig />} />
         <Route path="simple-actions" element={<SimpleActions />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>Route not found</p>
+            </main>
+          }
+        />
       </Routes>
     </BrowserRouter>
 
